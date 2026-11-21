@@ -1,0 +1,6 @@
+{
+  "name": "Z Survival",
+  "description": "100% offline-capable survival toolkit PWA with local WebLLM AI Medic, offline MapLibre GPS & compass, Pan-India offline translator, P2P comms, and emergency survival tools.",
+  "requestFramePermissions": ["camera", "microphone", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

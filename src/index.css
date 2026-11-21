@@ -1,0 +1,321 @@
+@import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+@theme {
+  --font-display: "Barlow Condensed", system-ui, -apple-system, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-amoled: #000000;
+  --color-surface: #0A0A0A;
+  --color-surface-elevated: #121212;
+  --color-hairline: #222222;
+  --color-amber-tactical: #FFB300;
+  --color-red-alert: #FF3B30;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    background-color: #000000;
+    color: #F5F5F5;
+    font-family: var(--font-sans);
+    letter-spacing: 0.01em;
+    min-height: 100dvh;
+    overscroll-behavior-y: none;
+  }
+
+  /* Custom high-contrast thin dark scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FFB300;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* MapLibre tactical dark overrides */
+.maplibregl-ctrl-group {
+  background-color: #0A0A0A !important;
+  border: 1px solid #262626 !important;
+  box-shadow: none !important;
+}
+
+.maplibregl-ctrl-group button {
+  background-color: #0A0A0A !important;
+  color: #F5F5F5 !important;
+  border-color: #262626 !important;
+}
+
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  filter: invert(1);
+}
+
+.maplibregl-ctrl-attrib {
+  background-color: rgba(0, 0, 0, 0.78) !important;
+  color: #8A8A8A !important;
+  font-size: 10px !important;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: #FFB300 !important;
+}
+
+.maplibregl-popup-content {
+  background-color: #0A0A0A !important;
+  color: #F5F5F5 !important;
+  border: 1px solid #2A2A2A !important;
+  border-radius: 12px !important;
+  padding: 12px !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.85) !important;
+}
+
+.maplibregl-popup-tip {
+  border-top-color: #0A0A0A !important;
+  border-bottom-color: #0A0A0A !important;
+}
+
+.apex-osm-night .maplibregl-canvas {
+  filter: invert(100%) hue-rotate(180deg) brightness(86%) contrast(108%) saturate(60%);
+}
+
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   ULTRA POWER SAVER (DOOMSDAY BATTERY MODE)
+   Pure #000000 OLED pixel shutoff · Zero animations, transitions, blur, shadows
+   ========================================================================== */
+html[data-power-saver="true"],
+html[data-power-saver="true"] body,
+html[data-power-saver="true"] #root {
+  background-color: #000000 !important;
+  color: #FFB300 !important;
+}
+
+html[data-power-saver="true"] *,
+html[data-power-saver="true"] *::before,
+html[data-power-saver="true"] *::after {
+  animation: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Force all card & elevated dark gray surfaces to pure #000000 OLED black */
+html[data-power-saver="true"] section,
+html[data-power-saver="true"] aside,
+html[data-power-saver="true"] article,
+html[data-power-saver="true"] header,
+html[data-power-saver="true"] nav,
+html[data-power-saver="true"] input,
+html[data-power-saver="true"] select,
+html[data-power-saver="true"] textarea {
+  background-color: #000000 !important;
+}
+
+html[data-power-saver="true"] [class*="bg-[#0"],
+html[data-power-saver="true"] [class*="bg-[#1"],
+html[data-power-saver="true"] [class*="bg-black/"] {
+  background-color: #000000 !important;
+}
+
+html[data-power-saver="true"] [class*="border-[#2"],
+html[data-power-saver="true"] [class*="border-[#1"] {
+  border-color: #2B1E00 !important;
+}
+
+/* Hide non-essential secondary cards/blocks to cut lit pixel count further */
+html[data-power-saver="true"] [data-non-essential="true"] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   NIGHT-VISION RED MODE (HIGH-READABILITY CRIMSON ON PURE #000000)
+   Pure #000000 AMOLED canvas · Headings/Icons #FF3B30 · Body #FF8A80 · Borders #FF2A2A
+   Never forces black text onto dark surfaces (avoids wildcard selection:/hover: matches).
+   ========================================================================== */
+html[data-night-vision="true"],
+html[data-night-vision="true"] body,
+html[data-night-vision="true"] #root {
+  background-color: #000000 !important;
+  color: #FF8A80 !important;
+}
+
+/* Pure #000000 surfaces for structural containers and cards */
+html[data-night-vision="true"] main,
+html[data-night-vision="true"] header,
+html[data-night-vision="true"] nav,
+html[data-night-vision="true"] section,
+html[data-night-vision="true"] aside,
+html[data-night-vision="true"] article,
+html[data-night-vision="true"] footer,
+html[data-night-vision="true"] form,
+html[data-night-vision="true"] input,
+html[data-night-vision="true"] select,
+html[data-night-vision="true"] textarea,
+html[data-night-vision="true"] option {
+  background-color: #000000 !important;
+  color: #FF8A80 !important;
+  border-color: #FF2A2A !important;
+}
+
+/* Strip gray/amber/green surface tints to pure #000000 without touching selection: or hover: */
+html[data-night-vision="true"] [class~="bg-[#0A0A0A]"],
+html[data-night-vision="true"] [class~="bg-[#0C0C0C]"],
+html[data-night-vision="true"] [class~="bg-[#0E0E0E]"],
+html[data-night-vision="true"] [class~="bg-[#111111]"],
+html[data-night-vision="true"] [class~="bg-[#121212]"],
+html[data-night-vision="true"] [class~="bg-[#141414]"],
+html[data-night-vision="true"] [class~="bg-[#1A1A1A]"],
+html[data-night-vision="true"] [class~="bg-[#171200]"],
+html[data-night-vision="true"] [class~="bg-[#140F00]"],
+html[data-night-vision="true"] [class~="bg-[#001A0D]"],
+html[data-night-vision="true"] [class~="bg-[#170605]"],
+html[data-night-vision="true"] [class~="bg-[#1C0706]"],
+html[data-night-vision="true"] [class~="bg-[#2A0505]"],
+html[data-night-vision="true"] [class~="bg-black/95"],
+html[data-night-vision="true"] [class~="bg-black/90"],
+html[data-night-vision="true"] [class~="bg-black/85"] {
+  background-color: #000000 !important;
+}
+
+/* Headings & strong emphasis: crisp Crimson Red (#FF3B30) */
+html[data-night-vision="true"] h1,
+html[data-night-vision="true"] h2,
+html[data-night-vision="true"] h3,
+html[data-night-vision="true"] h4,
+html[data-night-vision="true"] strong,
+html[data-night-vision="true"] b,
+html[data-night-vision="true"] label {
+  color: #FF3B30 !important;
+}
+
+/* Body text, list items, spans, links, and generic divs: readable Soft Coral-Red (#FF8A80) */
+html[data-night-vision="true"] p,
+html[data-night-vision="true"] li,
+html[data-night-vision="true"] span,
+html[data-night-vision="true"] a,
+html[data-night-vision="true"] div,
+html[data-night-vision="true"] small,
+html[data-night-vision="true"] code,
+html[data-night-vision="true"] pre {
+  color: #FF8A80 !important;
+}
+
+/* Buttons & interactive controls: #000000 base with #FF2A2A border and #FF3B30 / #FF8A80 text */
+html[data-night-vision="true"] button {
+  background-color: #000000 !important;
+  color: #FF3B30 !important;
+  border-color: #FF2A2A !important;
+}
+
+/* Solid CTA buttons, active tabs & active pills: deep crimson fill with bright coral-red text (never black!) */
+html[data-night-vision="true"] button[aria-selected="true"],
+html[data-night-vision="true"] button[aria-pressed="true"],
+html[data-night-vision="true"] [class~="bg-[#FFB300]"],
+html[data-night-vision="true"] [class~="bg-[#FF3B30]"],
+html[data-night-vision="true"] [class~="bg-[#00E676]"],
+html[data-night-vision="true"] [class~="bg-[#22C55E]"] {
+  background-color: #2A0505 !important;
+  color: #FF8A80 !important;
+  border-color: #FF2A2A !important;
+}
+
+html[data-night-vision="true"] button[aria-selected="true"] *,
+html[data-night-vision="true"] button[aria-pressed="true"] *,
+html[data-night-vision="true"] [class~="bg-[#FFB300]"] *,
+html[data-night-vision="true"] [class~="bg-[#FF3B30]"] *,
+html[data-night-vision="true"] [class~="bg-[#00E676]"] *,
+html[data-night-vision="true"] [class~="bg-[#22C55E]"] * {
+  color: #FF8A80 !important;
+}
+
+/* Progress bar tracks & fills remain visible */
+html[data-night-vision="true"] [class~="bg-[#1A1A1A]"] > div,
+html[data-night-vision="true"] [class~="bg-[#222222]"] > div {
+  background-color: #FF3B30 !important;
+}
+
+/* Borders & dividers: crisp #FF2A2A */
+html[data-night-vision="true"] [class*="border-"] {
+  border-color: #FF2A2A !important;
+}
+
+html[data-night-vision="true"] [class*="divide-"] > :not([hidden]) ~ :not([hidden]) {
+  border-color: #7A1414 !important;
+}
+
+/* Inputs, placeholders & range sliders */
+html[data-night-vision="true"] input::placeholder,
+html[data-night-vision="true"] textarea::placeholder {
+  color: #B84A44 !important;
+  opacity: 1 !important;
+}
+
+html[data-night-vision="true"] input[type="range"] {
+  accent-color: #FF3B30 !important;
+}
+
+html[data-night-vision="true"] ::selection {
+  background-color: #FF2A2A !important;
+  color: #000000 !important;
+}
+
+/* Icons & inline SVGs: crisp Crimson Red (#FF3B30), SVG labels Soft Coral-Red (#FF8A80) */
+html[data-night-vision="true"] svg {
+  color: #FF3B30 !important;
+}
+
+html[data-night-vision="true"] svg text {
+  fill: #FF8A80 !important;
+}
+
+html[data-night-vision="true"] svg [stroke="#FFB300"],
+html[data-night-vision="true"] svg [stroke="#00E676"],
+html[data-night-vision="true"] svg [stroke="#22C55E"] {
+  stroke: #FF3B30 !important;
+}
+
+html[data-night-vision="true"] svg [fill="#FFB300"],
+html[data-night-vision="true"] svg [fill="#00E676"],
+html[data-night-vision="true"] svg [fill="#22C55E"] {
+  fill: #FF3B30 !important;
+}
+
+/* Map canvas & raster images shifted cleanly to night-vision red */
+html[data-night-vision="true"] .maplibregl-canvas {
+  filter: grayscale(100%) sepia(100%) hue-rotate(-55deg) saturate(600%) brightness(55%) contrast(125%) !important;
+}
+
+html[data-night-vision="true"] img {
+  filter: grayscale(100%) sepia(100%) hue-rotate(-55deg) saturate(550%) brightness(65%) !important;
+}
+
+
+
